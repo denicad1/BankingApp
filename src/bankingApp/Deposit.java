@@ -5,7 +5,7 @@ import java.util.Date;
 public class Deposit extends Transaction{
         private String type="Deposit";
 
-    public Deposit(Date date, String note, int transNumber, double amount, String type) {
+    public Deposit(Date date, String note, int transNumber, double amount) {
         super(date, note, transNumber, amount);
         this.type = type;
     }
