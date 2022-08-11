@@ -1,6 +1,4 @@
 package bankingApp;
-import javax.sound.midi.Soundbank;
-import java.sql.SQLOutput;
 import java.util.Date;
 import java.util.Scanner;
 public class Main {
