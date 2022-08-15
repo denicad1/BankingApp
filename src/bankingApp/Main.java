@@ -2,23 +2,44 @@ package bankingApp;
 import java.util.Date;
 import java.util.Scanner;
 public class Main {
-    Account balance=new Account("My Account");
+
     public static void main(String[] args) {
+
     Main init=new Main();
+        Account balance=new Account("My Account");
 
+        init.init(balance);
 
-//    init.init();
-    int choice= init.initialInput();
 // these if statements are going with the withdraw, deposit balance section
-    if (choice == 1){
-
-    }
 
 
     }
 
-    void init(){
-        initialInput();
+    void init(Account balance){
+        Scanner input=new Scanner(System.in);
+        int choice=initialInput();
+
+        if (choice == 1){
+            balance.createWithdraw();
+        } else if (choice==2) {
+            balance.createDeposit();
+        } else if (choice==3) {
+            System.out.println("Your current balance is "+balance.getBalance());
+        }
+
+        System.out.println("Is there anything else you would like to do? Enter Yes or No");
+        String answer=input.nextLine();
+        String simplified=answer.toLowerCase();
+        if (simplified.equals("yes")) {
+
+            init(balance);
+        } else if (simplified.equals("no")) {
+            return;
+        }
+        else {
+            System.out.println("I didn't get that.");
+            init(balance);
+        }
     }
     int initialInput(){
         int choice=0;
