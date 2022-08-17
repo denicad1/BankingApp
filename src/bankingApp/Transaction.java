@@ -13,6 +13,7 @@ public class Transaction {
         this.note = note;
         this.transNumber = transNumber;
         this.amount = amount;
+
     }
 
     public Date getDate() {
@@ -46,4 +47,5 @@ public class Transaction {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
 }

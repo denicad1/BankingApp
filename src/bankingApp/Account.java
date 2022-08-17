@@ -21,17 +21,17 @@ public class Account {
         this.name = name;
     }
 
-    public ArrayList<Object> getTransactions() {
+    public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(ArrayList<Object> transactions) {
+    public void setTransactions(ArrayList<Transaction> transactions) {
         this.transactions = transactions;
     }
 
     protected double balance=0;
     protected String name;
-    protected ArrayList<Object> transactions= new ArrayList<Object>();
+    protected ArrayList<Transaction> transactions= new ArrayList<Transaction>();
 
     public Account(String name) {
         this.name = name;
@@ -71,15 +71,15 @@ public class Account {
         }
         Deposit deposit;
         if (this.transactions.size()==0){
-            int size=transactions.size();
-            deposit= new Deposit(date,note,size+1,amount);}
+
+            deposit= new Deposit(date,note,getTransactions().size(),amount);}
         else {
-          //  deposit= new Deposit(date,note,transactions.get(-1)[transNumber]+1,amount);
-            deposit= new Deposit(date,note,1,amount);
+            int TransNumber=getTransactions().get(getTransactions().size()-1).getTransNumber()+1;
+            deposit= new Deposit(date,note,TransNumber,amount);
 
             transactions.get(0);
         }
-
+        this.balance+=deposit.amount;
         this.transactions.add(deposit);
 
         }
@@ -91,6 +91,7 @@ public class Account {
         Date date=new Date();
         String note="";
         double amount=0;
+        Withdraw withdraw;
         Scanner input=new Scanner(System.in);
 
         try {
@@ -113,8 +114,16 @@ public class Account {
             return;
 
         }
-     //   Withdraw withdraw= new Withdraw(date,note,transactions.get(-1).transNumber+1,amount);
-        Withdraw withdraw= new Withdraw(date,note,1,amount);
+        if (this.transactions.size()==0){
+
+            withdraw= new Withdraw(date,note,getTransactions().size(),amount);}
+        else {
+            int TransNumber=getTransactions().get(getTransactions().size()-1).getTransNumber()+1;
+            withdraw= new Withdraw(date,note,getTransactions().get(getTransactions().size()-1).getTransNumber()+1,amount);
+
+            transactions.get(0);
+        }
+        this.balance-= withdraw.amount;
         transactions.add(withdraw);
 //  need to finish minusing withdraw from balance as long as balance doesn't go below zero
 

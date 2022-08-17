@@ -1,4 +1,5 @@
 package bankingApp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 public class Main {
@@ -8,7 +9,9 @@ public class Main {
     Main init=new Main();
         Account balance=new Account("My Account");
 
+        balance.transactions.add(new Deposit(new Date(),"adf",12,500));
         init.init(balance);
+
 
 // these if statements are going with the withdraw, deposit balance section
 
