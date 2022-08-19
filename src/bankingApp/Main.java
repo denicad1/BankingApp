@@ -8,7 +8,7 @@ public class Main {
         Main init = new Main();
         Account balance = new Account("my_account");
         Singleton.getInstance().addToArray(balance);
-        init.init(balance);
+        init.init();
     }
 
     private int initialInput(){
@@ -30,35 +30,47 @@ public class Main {
         return choice;
     }
 
-    private void init(Account balance){
+    private void init(){
+        Boolean switchAccount=true;
         Scanner input=new Scanner(System.in);
-        Account selection=accountSelection();
+        Account selection;
+        Account savedSelection = null;
+        if (switchAccount){
+            selection=accountSelection();
+        }else {
+            selection=savedSelection;
+        }
+        
         int choice=initialInput();
+       
         if (choice == 1){
-            balance.createWithdraw();
+            selection.createWithdraw();
         } else if (choice==2) {
-            balance.createDeposit();
+            selection.createDeposit();
         } else if (choice==3) {
-            System.out.println("Your current balance is "+balance.getBalance());
+            System.out.println("Your current balance is "+selection.getBalance());
         } else if (choice==4) {
             createAccount();
         } else if (choice==5) {
             getAccountNames();
         } else if (choice==6) {
-            selection=accountSelection();
+            switchAccount=true;
+
         }
+        savedSelection=selection;
+        switchAccount=false;
         System.out.println("Is there anything else you would like to do? Enter Yes or No");
         String answer=input.nextLine();
         String simplified=answer.toLowerCase();
         if (simplified.equals("yes")) {
-
-            init(selection);
+            
+            init();
         } else if (simplified.equals("no")) {
             return;
         }
         else {
             System.out.println("I didn't get that.");
-            init(selection);
+            init();
         }
     }
     private void createAccount(){
@@ -81,8 +93,6 @@ public class Main {
         String lower=choice.toLowerCase();
         Account def=new Account("");
         for (Account account:Singleton.getInstance().getArray()) {
-            System.out.println(account.getName());
-            System.out.println(lower.equals(account.name));
             if (lower.equals(account.name)) {
                 return account;
             }
