@@ -16,8 +16,8 @@ public class Main {
         try {
             Scanner input=new Scanner(System.in);
             System.out.println("Hello, Welcome to the Bank! \nPlease select an option below!\n" +
-                    "1 for Withdraw, 2 for Deposit, and 3 for Balance\nTo create a new account, press 4. "+
-                    "To list accounts, press 5. To switch to a different account, please press 6");
+                    "1 for Withdraw, 2 for Deposit, 3 for Balance, 4 to create a new account, "+
+                    "5 to list accounts and 6 to switch to a different account.");
             choice=input.nextInt();
             if (choice>6 || choice<1){
                 System.out.println("Your input needs to be either 1,2,3,4,5 or 6");
@@ -31,16 +31,10 @@ public class Main {
     }
 
     private void init(){
-        Boolean switchAccount=true;
+
         Scanner input=new Scanner(System.in);
         Account selection;
-        Account savedSelection = null;
-        if (switchAccount){
-            selection=accountSelection();
-        }else {
-            selection=savedSelection;
-        }
-        
+        selection=accountSelection();
         int choice=initialInput();
        
         if (choice == 1){
@@ -54,11 +48,8 @@ public class Main {
         } else if (choice==5) {
             getAccountNames();
         } else if (choice==6) {
-            switchAccount=true;
-
+         init();
         }
-        savedSelection=selection;
-        switchAccount=false;
         System.out.println("Is there anything else you would like to do? Enter Yes or No");
         String answer=input.nextLine();
         String simplified=answer.toLowerCase();
